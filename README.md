@@ -1,2 +1,3 @@
 "# aplikacje-internetowe-2-pogodynka" 
 "# aplikacje-internetowe-2-pogodynka" 
+"# -aplikacje-internetowe-2-pogodynka" 
