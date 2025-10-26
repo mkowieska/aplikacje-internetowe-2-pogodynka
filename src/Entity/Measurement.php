@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MeasurementRepository::class)]
 class Measurement
-{
+{ 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

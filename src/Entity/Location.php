@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
-{
+{ 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -113,7 +113,6 @@ class Location
     public function removeMeasurement(Measurement $measurement): static
     {
         if ($this->measurements->removeElement($measurement)) {
-            // set the owning side to null (unless already changed)
             if ($measurement->getLocation() === $this) {
                 $measurement->setLocation(null);
             }

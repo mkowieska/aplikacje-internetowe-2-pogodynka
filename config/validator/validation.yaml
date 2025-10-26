@@ -1,0 +1,63 @@
+App\Entity\Location:
+  properties:
+    city:
+      - NotBlank:
+          message: 'City cannot be blank.'
+          groups: ['create', 'Default']
+      - Length:
+          min: 2
+          max: 255
+          minMessage: 'City is too short (min {{ limit }} characters).'
+          groups: ['create', 'Default']
+    country:
+      - NotBlank:
+          message: 'Country cannot be blank.'
+          groups: ['create']
+      - Length:
+          min: 2
+          max: 2
+          exactMessage: 'Country must be 2 characters (ISO code).'
+          groups: ['create']
+    latitude:
+      - NotBlank:
+          message: 'Latitude cannot be blank.'
+          groups: ['create']
+      - Regex:
+          pattern: '/^-?\d{1,3}(?:\.\d+)?$/'
+          message: 'Invalid latitude format.'
+          groups: ['create']
+    longitude:
+      - NotBlank:
+          message: 'Longitude cannot be blank.'
+          groups: ['create']
+      - Regex:
+          pattern: '/^-?\d{1,3}(?:\.\d+)?$/'
+          message: 'Invalid longitude format.'
+          groups: ['create']
+
+App\Entity\Measurement:
+  properties:
+  date:
+    - NotBlank:
+      message: 'Date cannot be blank.'
+      groups: ['create', 'Default']
+    - DateTime:
+      message: 'Invalid date.'
+      groups: ['create', 'Default']
+  celsius:
+      - NotBlank:
+          message: 'Celsius cannot be blank.'
+          groups: ['create']
+      - Range:
+          min: -50
+          max: 50
+          exactMessage: 'Celsius must be between {{ min }} and {{ max }}.'
+          groups: ['create']
+      - Regex:
+          pattern: '/^-?\d+(\.\d+)?$/'
+          message: 'Invalid celsius format.'
+          groups: ['create']
+  location:
+      - NotNull:
+          message: 'Location is required.'
+          groups: ['create']

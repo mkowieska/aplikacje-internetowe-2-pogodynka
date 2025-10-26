@@ -6,14 +6,19 @@
 {% block title %}Weather in {{ location.city }}, {{ location.country }}{% endblock %}
 
 {% block body %}
-<main>
-    <h1>Weather in {{ location.city }}, {{ location.country }}</h1>
+<div class="py-4">
+    <h1 class="mb-4">Weather in {{ location.city }}, {{ location.country }}</h1>
 
-    <ul>
+    <ul class="list-group">
         {% for measurement in measurements %}
-            <li>{{ measurement.date|date('d.m.Y') }}: {{ measurement.celsius }}&deg;C</li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ measurement.date|date('d.m.Y') }}</span>
+                <span class="badge bg-primary rounded-pill">{{ measurement.celsius }}&deg;C</span>
+            </li>
+        {% else %}
+            <li class="list-group-item">No measurements found.</li>
         {% endfor %}
     </ul>
-</main>
+</div>
 {% endblock %}
 
