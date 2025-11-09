@@ -23,7 +23,15 @@
                 <td>{{ measurement.celsius }}</td>
                 <td>
                     <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_measurement_show', {'id': measurement.id}) }}">Show</a>
-                    <a class="btn btn-sm btn-outline-primary" href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">Edit</a>
+                    {% if is_granted('ROLE_MEASUREMENT_EDIT') %}
+                        <a class="btn btn-sm btn-outline-primary" href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">Edit</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_MEASUREMENT_DELETE') %}
+                        <form method="post" action="{{ path('app_measurement_delete', {'id': measurement.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ measurement.id) }}">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -34,5 +42,9 @@
         </tbody>
     </table>
     </div>
-    <a class="btn btn-success mt-3" href="{{ path('app_measurement_new') }}">Create new</a>
+
+    {% if is_granted('ROLE_MEASUREMENT_NEW') %}
+        <a class="btn btn-success mt-3" href="{{ path('app_measurement_new') }}">Create new</a>
+    {% endif %}
+    
 {% endblock %}

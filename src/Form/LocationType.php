@@ -15,7 +15,7 @@ class LocationType extends AbstractType
         $builder
             ->add('city', null, [
                 'label' => 'City',
-                'attr' => ['autofocus' => true, 'placeholder' => 'Enter city name...'],
+                'attr' => ['autofocus' => true, 'placeholder' => 'Enter city name (e.g. Szczecin)'],
             ])
             ->add('country', null, [
                 'label' => 'Country',
