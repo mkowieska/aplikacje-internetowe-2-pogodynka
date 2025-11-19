@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ExternalAPIController{% endblock %}
+{% block body %}
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{form_end(form)}}
+    {% if weather_data %}
+        <h2> Data from Open Meteo. </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Max temp in Celsius</th>
+                    <th>Min temp in Celsius</th>
+                    <th>Precipitation in millimeters</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set count = weather_data.daily.time|length %}
+                {% for i in 0..(count - 1) %}
+                    <tr>
+                        <td>{{ weather_data.daily.time[i] }}</td>
+                        <td>{{ weather_data.daily.temperature_2m_max[i] }}</td>
+                        <td>{{ weather_data.daily.temperature_2m_min[i] }}</td>
+                        <td>{{ weather_data.daily.precipitation_sum[i] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
