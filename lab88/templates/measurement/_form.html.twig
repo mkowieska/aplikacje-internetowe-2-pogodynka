@@ -1,0 +1,23 @@
+{# Use Bootstrap 5 form theme for proper classes #}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{# disable HTML5 client-side validation - rely on backend (PHP) validation #}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {# Show any global/form-level errors #}
+    {{ form_errors(form) }}
+
+    <div class="mb-3">
+        {{ form_row(form.date) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.celsius) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.location) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

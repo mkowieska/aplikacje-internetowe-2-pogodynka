@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location index{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Location index</h1>
+
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for location in locations %}
+            <tr>
+                <td>{{ location.id }}</td>
+                <td>{{ location.city }}</td>
+                <td>{{ location.country }}</td>
+                <td>{{ location.latitude }}</td>
+                <td>{{ location.longitude }}</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_location_show', {'id': location.id}) }}">Show</a>
+                    {% if is_granted('ROLE_LOCATION_EDIT') %}
+                        <a class="btn btn-sm btn-outline-primary" href="{{ path('app_location_edit', {'id': location.id}) }}">Edit</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_LOCATION_DELETE') %}
+                        <form method="post" action="{{ path('app_location_delete', {'id': location.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ location.id) }}">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+    </div>
+    
+    {% if is_granted('ROLE_LOCATION_NEW') %}
+        <a class="btn btn-success mt-3" href="{{ path('app_location_new') }}">Create new</a>
+    {% endif %}
+
+{% endblock %}

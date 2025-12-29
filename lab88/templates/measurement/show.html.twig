@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Measurement{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Measurement</h1>
+
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ measurement.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ measurement.date ? measurement.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Celsius</th>
+                <td>{{ measurement.celsius }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-secondary" href="{{ path('app_measurement_index') }}">Back to list</a>
+    <a class="btn btn-primary" href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">Edit</a>
+
+    {{ include('measurement/_delete_form.html.twig') }}
+{% endblock %}

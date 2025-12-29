@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TextInputController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<h1> Text Submission Form</h1>
+{{form_start(form)}}
+{{form_widget(form)}}
+<button type="submit">Submit</button>
+{{form_end(form)}}
+
+{% if submittedText is not empty %}
+    <h2>Submitted Text:</h2>
+    <p>{{ submittedText }}</p>
+    <p>{{ submittedText|raw }}</p>
+{% endif %}
+
+{% endblock %}
